@@ -252,9 +252,20 @@ const d3LineContourComparison = {
             // h[0] is the task that will be shown
 			
 			// Find the appropriate task and draw it.
+			/*
 			showdata = this.data.series.filter(d=>d.taskId==h[0])[0];
 			interaction = true;
 			this.update()
+			*/
+			let obj = this;
+			fetch(`data/${ h[0] }/contour.json`)
+			  .then(res=>res.json())
+			  .then( (data) => {
+				
+				showdata = {taskId: h[0], data: data}; // obj.data.series.filter(d=>d.taskId==h[0])[0];
+				interaction = true;
+				obj.update()
+			})
 			
         } // if
 		

@@ -27,11 +27,6 @@
             "highlightTasks": true
           },
           "fetchData": {
-            "urlTemplate": "data/${taskId}/contour.json",
-            "tasksByFilter": true,
-            "autoFetchOnFilterChange": true,
-            "maxTasks": 50,
-			"dataFilterType": "lineSeriesFromLines"
           }
         },
         {
