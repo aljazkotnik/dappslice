@@ -22,7 +22,7 @@ const d3LineContourComparison = {
     make : function () {
 
         const marginDefault = {top: 20, right: 20, bottom: 30, left: 50};
-        const margin = ( this.layout.margin === undefined ) ? marginDefault  : this.layout.margin;
+        const margin = ( this.layout.margin === undefined ) ? marginDefault : this.layout.margin;
 
         const container = d3.select(`#${this.elementId}`);
 
@@ -55,7 +55,11 @@ const d3LineContourComparison = {
 			
 			
 		// Both "plotMakeForD3Each" and "plotUpdateForD3Each" load the data, but only "plotUpdateForD3Each" sets the newData flag. What I really want is just to adjust the scales on the first time - just have it done in the make!!
-		scales = createScales(this.data.series[0].data.extent, [width, height])
+		let extent = this.layout.extent;
+		if(!extent){
+			extent = this.data.series[0].data.extent
+		}; // if
+		scales = createScales(extent, [width, height])
 		
 		
 		
@@ -118,6 +122,7 @@ const d3LineContourComparison = {
 		} // zoomed
 		
 		
+		
 
         this.update();
 
@@ -141,7 +146,7 @@ const d3LineContourComparison = {
         const marginDefault = {top: 20, right: 20, bottom: 30, left: 50};
         const margin = ( this.layout.margin === undefined ) ? marginDefault : this.layout.margin;
 
-        const clipId = `clip-${this._prid}-${this._id}`;
+        
 
         const svgWidth = container.node().offsetWidth;
         const svgHeight = this.layout.height;
@@ -152,29 +157,6 @@ const d3LineContourComparison = {
         const height = svgHeight - margin.top - margin.bottom;
 		
 		
-		
-		const clipRect = svg.select(".clip-rect");
-
-        if ( clipRect.empty() ) {
-            svg.append("defs").append("clipPath")
-                .attr("id", clipId)
-                .append("rect")
-                    .attr("class","clip-rect")
-                    .attr("width", width)
-                    .attr("height", height);
-        } else {
-            clipRect.attr("width", width)
-        }
-
-        
-
-        let focus = plotArea.select(".focus");
-        if ( focus.empty() ) {
-            plotArea.append("circle")
-                .attr("class","focus")
-                .attr("fill","none")
-                .attr("r",1);
-        }
 		
 		
 		
@@ -201,6 +183,8 @@ const d3LineContourComparison = {
 			draw(g, showdata.data.lines, line, d=>d.color)
 			
 			// Update the title.
+			d3.select(`#plot-title-text-${this._prid}-${this._id}`).text(showdata.taskId)
+			
 			
 		} // if
 		
@@ -227,7 +211,7 @@ const d3LineContourComparison = {
                 .attr("text-anchor", "end")
                 .text(this.layout.xAxisLabel);
         } else {
-            gX.transition().call( xAxis );
+            gX.call( xAxis );
             gX.select(".x-axis-text").attr("x", width)
         }
 
@@ -244,7 +228,7 @@ const d3LineContourComparison = {
                     .attr("text-anchor", "end")
                     .text(this.layout.yAxisLabel);
         } else {
-            gY.transition().call( yAxis );
+            gY.call( yAxis );
         }
 
        
