@@ -1,0 +1,101 @@
+{
+  "title": "D-app example data",
+  "metaDataConfig": {
+    "metaDataUrl": "data/metadata.csv",
+    "metaDataCsv": true,
+    "generateTaskIds": false,
+    "taskIdRoot": "case_",
+    "taskIdFormat": "d",
+    "setLabelsToTaskIds": false
+  },
+  "uiConfig": {
+    "plotTasksButton": false,
+    "saveTasksButton": false,
+    "replaceTasksNameWith" : "Cases"
+  },
+  "plotRows": [
+    {
+      "title": "Teaser demo.",
+      "plots": [
+	    {
+          "plotType": "d3LineContourComparison",
+          "layout": {
+            "title": "Contour plot",
+            "colWidth": 3,
+            "height": 300,
+            "highlightTasks": true
+          },
+          "fetchData": {
+            "urlTemplate": "data/${taskId}/contour.json",
+            "tasksByFilter": true,
+            "autoFetchOnFilterChange": true,
+            "maxTasks": 50,
+			"dataFilterType": "lineSeriesFromLines"
+          }
+        },
+        {
+          "plotType": "cfD3Scatter",
+          "data": {
+            "xProperty": "AtA1",
+            "yProperty": "Yp",
+			"cProperty": "name"
+          },
+          "layout": {
+            "title": "Yp vs. AtA1",
+            "colWidth": 3,
+            "height": 300,
+            "highlightTasks": true
+          }
+        },
+		{
+          "plotType": "d3LineSeries",
+          "layout": {
+            "title": "Camber",
+            "colWidth": 3,
+            "height": 300,
+            "highlightTasks": true,
+            "cSet": "name"
+          },
+          "fetchData": {
+            "urlTemplate": "data/${taskId}/camber.csv",
+			"text": true,
+            "tasksByFilter": true,
+            "autoFetchOnFilterChange": true,
+            "maxTasks": 50,
+            "dataFilterType": "lineSeriesFromCsv",
+			"dataFilterConfig": {
+				"skipCommentLines": true,
+				"xProperty": "x",
+				"yProperty": "y",
+				"cProperty": "name"
+			}
+          }
+        },
+        {
+          "plotType": "d3LineSeries",
+          "layout": {
+            "title": "Mach",
+            "colWidth": 3,
+            "height": 300,
+            "highlightTasks": true,
+            "cSet": "name"
+          },
+          "fetchData": {
+            "urlTemplate": "data/${taskId}/mach.csv",
+			"text": true,
+            "tasksByFilter": true,
+            "autoFetchOnFilterChange": true,
+            "maxTasks": 50,
+            "dataFilterType": "lineSeriesFromCsv",
+			"dataFilterConfig": {
+				"skipCommentLines": true,
+				"xProperty": "x",
+				"yProperty": "y",
+				"cProperty": "name"
+			}
+          }
+        }
+      ]
+    }
+  ]
+}

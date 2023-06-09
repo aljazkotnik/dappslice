@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> 
+</head>
+
+<body>
+
+<div class="container-fluid" id="target"> </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/dbslice/build/dbslice.min.js"></script>
+
+<script type="module">
+	import {d3LineContourComparison} from "./code/src/d3LineContourComparison.js";
+
+
+	
+	// I want to port in a bespoke plotting class. I want to just add it to dbslice, and the session.json object. I can, and have to, define the session object here.
+	fetch("session.json")
+	  .then(res=>res.json())
+	  .then(session=>{
+	    
+		// Add in the plotconfig for the new plot class.
+		let lcp = session.plotRows[0].plots[0];
+		lcp.plotType = undefined;
+		lcp.plotFunc = d3LineContourComparison;
+	  
+		dbslice.start( "target" , session);
+	  })
+	
+    
+
+</script>
+
+</body>
+</html>
