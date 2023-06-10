@@ -20,12 +20,12 @@
 
 	
 	// I want to port in a bespoke plotting class. I want to just add it to dbslice, and the session.json object. I can, and have to, define the session object here.
-	fetch("session.json")
+	fetch("whole_session.json")
 	  .then(res=>res.json())
 	  .then(session=>{
 	    
 		// Add in the plotconfig for the new plot class.
-		let lcp = session.plotRows[0].plots[0];
+		let lcp = session.plotRows[3].plots[0];
 		lcp.plotType = undefined;
 		lcp.plotFunc = d3LineContourComparison;
 	    console.log(lcp)

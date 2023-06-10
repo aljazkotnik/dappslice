@@ -1,0 +1,239 @@
+{
+  "title": "D-app example data",
+  "metaDataConfig": {
+    "metaDataUrl": "data/metadata.csv",
+    "metaDataCsv": true,
+    "generateTaskIds": false,
+    "taskIdRoot": "case_",
+    "taskIdFormat": "d",
+    "setLabelsToTaskIds": false
+  },
+  "uiConfig": {
+    "plotTasksButton": false,
+    "saveTasksButton": false,
+    "replaceTasksNameWith" : "Cases"
+  },
+  "plotRows": [
+    {
+      "title": "Row 1",
+      "plots": [
+		{
+          "plotType": "cfD3Scatter",
+          "data": {
+            "xProperty": "AtA1",
+            "yProperty": "Mt_area",
+			"cProperty": "name"
+          },
+          "layout": {
+            "title": "Mt_area vs. AtA1",
+            "colWidth": 3,
+            "height": 300,
+            "highlightTasks": true
+          }
+        },
+        {
+          "plotType": "cfD3Scatter",
+          "data": {
+            "xProperty": "AtA1",
+            "yProperty": "M_sh",
+			"cProperty": "name"
+          },
+          "layout": {
+            "title": "M_sh vs. AtA1",
+            "colWidth": 3,
+            "height": 300,
+            "highlightTasks": true
+          }
+        },
+		{
+		  "plotType": "cfD3Histogram",
+		  "data": {
+			"property": "AtA1"
+		  },
+		  "layout": {
+			"title": "AtA1 histogram",
+			"colWidth": 3,
+			"height": 300
+		  }
+		}
+	  ]
+	},
+	{
+		
+      "title": "Row 2",
+      "plots": [
+			
+			
+		{
+		  "plotType": "cfD3BarChart",
+		  "data": {
+			"property": "cat_TC"
+		  },
+		  "layout": {
+			"title": "TC bar chart",
+			"colWidth": 3,
+			"height": 300
+		  }
+		},
+		{
+		  "plotType": "cfD3BarChart",
+		  "data": {
+			"property": "cat_SC"
+		  },
+		  "layout": {
+			"title": "SC bar chart",
+			"colWidth": 3,
+			"height": 300
+		  }
+		},
+		
+		
+		{
+		  "plotType": "cfD3Histogram",
+		  "data": {
+			"property": "Axt"
+		  },
+		  "layout": {
+			"title": "Axt histogram",
+			"colWidth": 3,
+			"height": 300
+		  }
+		},
+		
+		
+		{
+          "plotType": "d3LineSeries",
+          "layout": {
+            "title": "Theta",
+            "colWidth": 3,
+            "height": 300,
+            "highlightTasks": true,
+            "cSet": "name"
+          },
+          "fetchData": {
+            "urlTemplate": "data/${taskId}/theta.csv",
+			"text": true,
+            "tasksByFilter": true,
+            "autoFetchOnFilterChange": true,
+            "maxTasks": 300,
+            "dataFilterType": "lineSeriesFromCsv",
+			"dataFilterConfig": {
+				"skipCommentLines": true,
+				"xProperty": "x",
+				"yProperty": "y",
+				"cProperty": "name"
+			}
+          }
+        }
+	  ]
+	},	
+	
+	
+	{
+		"title": "Row 3",
+		"plots": [
+			{
+			  "plotType": "cfD3BarChart",
+			  "data": {
+				"property": "cat_load_coef"
+			  },
+			  "layout": {
+				"title": "PSI bar chart",
+				"colWidth": 3,
+				"height": 300
+			  }
+			},
+			{
+			  "plotType": "cfD3BarChart",
+			  "data": {
+				"property": "cat_Ax2Ax1"
+			  },
+			  "layout": {
+				"title": "Ax2Ax1 bar chart",
+				"colWidth": 3,
+				"height": 300
+			  }
+			},
+			{
+			  "plotType": "cfD3BarChart",
+			  "data": {
+				"property": "cat_A"
+			  },
+			  "layout": {
+				"title": "A bar chart",
+				"colWidth": 3,
+				"height": 300
+			  }
+			}
+		]
+	},
+	
+	
+	{
+		
+      "title": "Row 4",
+      "plots": [
+	  
+		{
+          "plotType": "d3LineContourComparison",
+          "layout": {
+            "title": "Contour plot",
+            "colWidth": 3,
+            "height": 300,
+			"extent": [[-0.04,0.05],[-0.04,0.05]],
+            "highlightTasks": true
+          }
+        },
+	
+		{
+          "plotType": "d3LineSeries",
+          "layout": {
+            "title": "Camber",
+            "colWidth": 3,
+            "height": 300,
+            "highlightTasks": true,
+            "cSet": "name"
+          },
+          "fetchData": {
+            "urlTemplate": "data/${taskId}/camber.csv",
+			"text": true,
+            "tasksByFilter": true,
+            "autoFetchOnFilterChange": true,
+            "maxTasks": 300,
+            "dataFilterType": "lineSeriesFromCsv",
+			"dataFilterConfig": {
+				"skipCommentLines": true,
+				"xProperty": "x",
+				"yProperty": "y",
+				"cProperty": "name"
+			}
+          }
+        },
+        {
+          "plotType": "d3LineSeries",
+          "layout": {
+            "title": "Mach",
+            "colWidth": 3,
+            "height": 300,
+            "highlightTasks": true,
+            "cSet": "name"
+          },
+          "fetchData": {
+            "urlTemplate": "data/${taskId}/mach.csv",
+			"text": true,
+            "tasksByFilter": true,
+            "autoFetchOnFilterChange": true,
+            "maxTasks": 300,
+            "dataFilterType": "lineSeriesFromCsv",
+			"dataFilterConfig": {
+				"skipCommentLines": true,
+				"xProperty": "x",
+				"yProperty": "y",
+				"cProperty": "name"
+			}
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -106,10 +106,10 @@ def contourextent(C):
 
 
 
-root = "C:\\Users\\Aljaz\\Documents\\CAMBRIDGE\\PhD\\github_repos\\dbslice\\demos\\dapp\\data"
+root = "C://Users//Aljaz//Documents//CAMBRIDGE//PhD//github_repos//dappslice"
 
 
-with open(".//rawdata//M95A60SC80TC4_psi040A95_load_coef.json") as f:
+with open(".//rawdata//M95A60SC80TC4_psi040A95_all.json") as f:
   data = json.load(f)
 
   M = []
@@ -118,7 +118,7 @@ with open(".//rawdata//M95A60SC80TC4_psi040A95_load_coef.json") as f:
   for case in data:
     
     # Create a folder for each case and save the files into it.
-    folder = os.path.join(root, case["metadata"]["name"][0]);
+    folder = os.path.join(root, "data", case["metadata"]["name"][0]);
     if not os.path.exists(folder):
       os.makedirs(folder)
     
@@ -164,6 +164,14 @@ with open(".//rawdata//M95A60SC80TC4_psi040A95_load_coef.json") as f:
     m["dr"] = m["dr"][0]
     m["taskId"] = m["name"]
     m["label"] = m["name"]
+    
+    continuousAsCategorical = ["PC","TC","SC","load_coef","Ax2Ax1","A"]
+    namesContinuousAsCategorical = []
+    for v in continuousAsCategorical:
+        m["cat_" + v] = "_" + str( m[v] )
+        namesContinuousAsCategorical.append( "cat_" + v )
+    
+    
     M.append(case["metadata"])
     
     
@@ -173,7 +181,7 @@ with open(".//rawdata//M95A60SC80TC4_psi040A95_load_coef.json") as f:
   #           'AtD', 'rad_contr', 'inc', 'M_max', 's_max', 'P_throat_area_avg', 
   #           'P', 'P_area', 'P_is', 'P_is_rhoV', 'P_throat_area_avg_bl', 'P_bl', 
   #           'P_area_bl', 'P_is_bl', 'P_is_rhoV_bl', 'dr', 'taskId', 'label']
-  fields = case["metadata"].keys()
+  fields = list( case["metadata"].keys() )
   csvmetadata = json2csv(M, fields)  
-  csvwrite(root, "metadata.csv", fields, csvmetadata)
+  csvwrite( os.path.join(root, "data"), "metadata.csv", fields, csvmetadata)
   

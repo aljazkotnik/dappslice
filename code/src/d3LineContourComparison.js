@@ -44,10 +44,7 @@ const d3LineContourComparison = {
 		gPlotArea.append("g").attr("class", "comparison")
 
 
-        if ( this.data == null || this.data == undefined ) {
-            console.log ("in line plot - no data");
-            return
-        }
+       
 
         container.append("div")
             .attr("class", "tool-tip")
@@ -74,15 +71,6 @@ const d3LineContourComparison = {
         svg.call(zoom);
 
 		let obj = this;
-        /*
-		function zoomed(event) {
-            const t = event.transform;
-            scales.x.domain(t.rescaleX(scales.x).domain());
-            scales.y.domain(t.rescaleY(scales.y).domain());
-            
-            obj.update()
-        }
-		*/
 		
 		var viewtransform = d3.zoomIdentity;
 		function zoomed(event){
